@@ -1,19 +1,21 @@
 {
-	"name": "clipboardy",
+	"name": "@powerfulyang/clipboardy",
 	"version": "3.0.0",
 	"description": "Access the system clipboard (copy/paste)",
 	"license": "MIT",
-	"repository": "sindresorhus/clipboardy",
-	"funding": "https://github.com/sponsors/sindresorhus",
+	"repository": "powerfulyang/clipboardy",
+	"funding": "https://github.com/sponsors/powerfulyang",
+	"publishConfig": {
+		"access": "public"
+	},
 	"author": {
-		"name": "Sindre Sorhus",
-		"email": "sindresorhus@gmail.com",
-		"url": "https://sindresorhus.com"
+		"name": "powerfulyang",
+		"email": "i@powerfulyang.com",
+		"url": "https://powerfulyang.com"
 	},
 	"type": "module",
 	"exports": {
-		"node": "./index.js",
-		"default": "./browser.js"
+		".": "./index.js"
 	},
 	"engines": {
 		"node": "^12.20.0 || ^14.13.1 || >=16.0.0"
@@ -24,7 +26,6 @@
 	"files": [
 		"index.js",
 		"index.d.ts",
-		"browser.js",
 		"lib",
 		"fallbacks"
 	],
@@ -43,13 +44,14 @@
 	],
 	"dependencies": {
 		"arch": "^2.2.0",
-		"execa": "^5.1.1",
+		"execa": "^7.1.1",
 		"is-wsl": "^2.2.0"
 	},
 	"devDependencies": {
-		"ava": "^3.15.0",
-		"tsd": "^0.18.0",
-		"xo": "^0.45.0"
+		"@types/node": "20.2.5",
+		"ava": "^5.3.0",
+		"tsd": "^0.28.1",
+		"xo": "^0.54.2"
 	},
 	"ava": {
 		"serial": true

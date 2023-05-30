@@ -1,7 +1,9 @@
 name: CI
+
 on:
   - push
   - pull_request
+
 jobs:
   test:
     name: Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
@@ -10,15 +12,29 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 16
+          - 'lts/*'
         os:
-          # - ubuntu-latest
+          - ubuntu-latest
           - macos-latest
           - windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm test
+      - run: pnpm install
+      - name: Test on Linux
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get install -y xsel xvfb
+          Xvfb :99 &
+          export DISPLAY=:99
+          pnpm test
+      - name: Test on other OS
+        if: matrix.os != 'ubuntu-latest'
+        run: |
+          pnpm test
+
